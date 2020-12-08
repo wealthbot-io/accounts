@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,6 +25,21 @@ class CreateUsersTable extends Migration
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
         });
+
+        $now = Carbon::now();
+
+        DB::table('users')->insert([
+            'id' => 'd32e1b50-fcde-4b2b-908c-a93e781931ee',
+            'name' => 'Webo',
+            'email' => 'wealthbot@wealthbot.io',
+            'email_verified_at' => $now,
+            'created_at' => $now,
+            'updated_at' => $now,
+            'password' => Hash::make('wealthbot@wealthbot.io'),
+            'profile_photo_path' => 'profile-photos/webo.png',
+
+
+        ]);
     }
 
     /**

@@ -50,8 +50,25 @@ class CreateOauthClientsTable extends Migration
             $table->boolean('personal_access_client');
             $table->boolean('password_client');
             $table->boolean('revoked');
+            $table->boolean('auto_authorize')->default(false);
             $table->timestamps();
         });
+
+        $now = \Carbon\Carbon::now();
+        $port = env('ACCOUNTS_HTTP_PORT', 12001);
+
+        DB::table('oauth_clients')->insert([
+            'id' => '9230e2f3-895b-4013-8c0e-602e4a55d708',
+            'user_id' => 'd32e1b50-fcde-4b2b-908c-a93e781931ee', // webo default user id
+            'name' => 'Wealthbot Webapp',
+            'redirect' => "http://localhost:$port/auth/callback",
+            'personal_access_client' => false,
+            'password_client' => false,
+            'revoked' => false,
+            'auto_authorize' => true,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
     }
 
     /**
